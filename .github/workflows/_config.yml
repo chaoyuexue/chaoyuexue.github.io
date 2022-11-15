@@ -1,8 +1,6 @@
 name: GitHub Actions Build and Deploy Demo
-on:
-  push:
-    branches:
-      - main
+on: [push]
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -10,11 +8,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Build and Deploy
+    - name: vuepress-deploy
       uses: jenkey2011/vuepress-deploy@master
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         TARGET_REPO: chaoyuexue/chaoyuexue.github.io
-        TARGET_BRANCH: main
+        TARGET_BRANCH: release
         BUILD_SCRIPT: yarn && yarn docs:build
         BUILD_DIR: docs/.vuepress/dist/
